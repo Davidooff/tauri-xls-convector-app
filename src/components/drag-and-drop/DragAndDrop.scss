@@ -1,0 +1,12 @@
+.chose-headers {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+
+  div:last-child {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
