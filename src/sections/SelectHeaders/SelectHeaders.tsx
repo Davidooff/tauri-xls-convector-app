@@ -53,7 +53,7 @@ const SelectHeaders = (props: Props) => {
             <SelectHeadersEl
               value={headers[el]}
               name={el}
-              isActive={Object.keys(selectedHeaders).includes(el)}
+              isActive={el in selectedHeaders}
               handleClcik={handleClcik}
               changeValue={changeHeaderValue}
               changeDefaultValue={changeHeaderDefaultValue}
