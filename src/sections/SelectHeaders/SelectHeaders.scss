@@ -1,0 +1,19 @@
+.list-el {
+  display: flex;
+  align-items: center;
+  .check {
+    width: 10px;
+    height: 10px;
+    background-color: black;
+  }
+  input {
+    width: calc(50% - 5px);
+    padding: 0;
+    margin: 0;
+  }
+  &.list-el-active {
+    .check {
+      background-color: blue;
+    }
+  }
+}
