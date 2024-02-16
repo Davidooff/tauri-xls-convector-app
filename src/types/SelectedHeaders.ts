@@ -1,3 +1,7 @@
 export interface SelectedHeaders {
-  [key: string]: { name: string; defaultValue: string | null };
+  [key: string]: {
+    name: string | null;
+    ldifName: string | null;
+    defaultValue: string | null;
+  };
 }

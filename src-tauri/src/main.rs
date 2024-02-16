@@ -26,14 +26,15 @@ fn convert_filds(raw_filds: String) -> String {
                 Ok(parsed_values) => {
                   let value = parsed_values.get("w");
                     if let Some(value) = value {
-                      fields.insert(key.clone(), value.as_str().unwrap().to_string());
-                      println!("Value parsed successfuly {}", value.to_string());
-
                       // chacking is it a labels(headers)
                       let key_dig = get_digits(&key);
                       if key_dig.len() == 1 && key_dig[0] == 1 {
                           headers.insert(key, value.as_str().unwrap().to_string());
+                          continue;
                       }
+                      fields.insert(key.clone(), value.as_str().unwrap().to_string());
+                      println!("Value parsed successfuly {}", value.to_string());
+
                   } else {
                       println!("Value not found");
                   }

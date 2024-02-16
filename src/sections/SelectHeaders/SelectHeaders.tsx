@@ -6,6 +6,7 @@ import { SelectedHeaders } from "../../types/SelectedHeaders";
 interface Props {
   headers: FieldObject | undefined;
   selectedHeaders: SelectedHeaders;
+  addHeader: () => void;
   setSelectedHeaders: React.Dispatch<React.SetStateAction<SelectedHeaders>>;
 }
 
@@ -20,7 +21,10 @@ const SelectHeaders = (props: Props) => {
         const { [name]: _, ...rest } = val;
         updatedVal = rest;
       } else {
-        updatedVal = { ...val, [name]: { name: value, defaultValue: null } };
+        updatedVal = {
+          ...val,
+          [name]: { name: value, ldifName: "ldifName", defaultValue: null },
+        };
       }
       return updatedVal;
     });
@@ -29,6 +33,12 @@ const SelectHeaders = (props: Props) => {
   const changeHeaderValue = (name: string, newValue: string) => {
     props.setSelectedHeaders((val) => {
       return { ...val, [name]: { ...val[name], name: newValue } };
+    });
+  };
+
+  const changeLdifName = (name: string, newValue: string) => {
+    props.setSelectedHeaders((val) => {
+      return { ...val, [name]: { ...val[name], ldifName: newValue } };
     });
   };
 
@@ -48,17 +58,35 @@ const SelectHeaders = (props: Props) => {
     <div>
       {!headers && <span>choose headers at first</span>}
       {headers != undefined && (
-        <div>
+        <div className="headers-list">
           {Object.keys(headers).map((el) => (
             <SelectHeadersEl
-              value={headers[el]}
+              value={
+                el in selectedHeaders
+                  ? String(selectedHeaders[el].name)
+                  : headers[el]
+              }
               name={el}
+              ldifName={
+                el in selectedHeaders
+                  ? String(selectedHeaders[el].ldifName)
+                  : "LdifName"
+              }
+              defaultValue={
+                el in selectedHeaders
+                  ? String(selectedHeaders[el].defaultValue)
+                  : "null"
+              }
               isActive={el in selectedHeaders}
               handleClcik={handleClcik}
               changeValue={changeHeaderValue}
+              changeLdifName={changeLdifName}
               changeDefaultValue={changeHeaderDefaultValue}
             />
           ))}
+          <div className="add" onClick={props.addHeader}>
+            +
+          </div>
         </div>
       )}
     </div>
@@ -68,9 +96,12 @@ const SelectHeaders = (props: Props) => {
 interface SelectHeadersProps {
   value: string;
   name: string;
+  ldifName: string;
+  defaultValue: string | null;
   isActive: boolean;
   handleClcik: (name: string, value: string) => void;
   changeValue: (name: string, newValue: string) => void;
+  changeLdifName: (name: string, newValue: string) => void;
   changeDefaultValue: (name: string, newValue: string) => void;
 }
 
@@ -78,9 +109,12 @@ const SelectHeadersEl = (props: SelectHeadersProps) => {
   const {
     value,
     name,
+    ldifName,
+    defaultValue,
     isActive,
     handleClcik,
     changeValue,
+    changeLdifName,
     changeDefaultValue,
   } = props;
 
@@ -96,7 +130,7 @@ const SelectHeadersEl = (props: SelectHeadersProps) => {
         }}
       ></div>
       <input
-        defaultValue={value}
+        value={value}
         ref={inputRef}
         onChange={(event) => {
           if (isActive) {
@@ -105,7 +139,16 @@ const SelectHeadersEl = (props: SelectHeadersProps) => {
         }}
       />
       <input
-        value={isActive ? undefined : "null"}
+        value={isActive ? ldifName : "null"}
+        disabled={!isActive}
+        onChange={(event) => {
+          if (isActive) {
+            changeLdifName(name, event.target.value);
+          }
+        }}
+      />
+      <input
+        value={isActive ? String(defaultValue) : "null"}
         disabled={!isActive}
         onChange={(event) => {
           if (isActive) {

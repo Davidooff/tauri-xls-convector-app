@@ -1,19 +1,36 @@
-.list-el {
+.headers-list {
+  height: 300px;
+  overflow-y: scroll;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  .check {
-    width: 10px;
-    height: 10px;
-    background-color: black;
-  }
-  input {
-    width: calc(50% - 5px);
-    padding: 0;
-    margin: 0;
-  }
-  &.list-el-active {
+  .list-el {
+    display: flex;
+    align-items: center;
     .check {
-      background-color: blue;
+      width: 10px;
+      height: 10px;
+      background-color: black;
     }
+    input {
+      width: calc(50% - 5px);
+      padding: 0;
+      margin: 0;
+    }
+    &.list-el-active {
+      .check {
+        background-color: blue;
+      }
+    }
+  }
+  .add {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 20px;
+    height: 15px;
+    margin-top: 10px;
+    border-radius: 10%;
+    background-color: gray;
   }
 }
