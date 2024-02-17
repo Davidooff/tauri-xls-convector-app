@@ -6,10 +6,13 @@ import LdifOu from "./sections/LdifOu/LdifOu";
 import SelectHeaders from "./sections/SelectHeaders/SelectHeaders";
 import { SelectedHeaders } from "./types/SelectedHeaders";
 import { getFiltered } from "./sections/SelectHeaders/defaultRenaming";
+import { ldifRules } from "./types/LdifRule";
+import { defaulLdif } from "./sections/LdifOu/defaultLdif";
 
 const App = () => {
   const [fileData, setFileData] = useState<FileData | null>(null);
   const [selectedHeaders, setSelectedHeaders] = useState<SelectedHeaders>({});
+  const [ldifRule, setLdifRule] = useState<ldifRules | null>(null);
 
   useEffect(() => {
     if (fileData && !Object.keys(selectedHeaders).length) {
@@ -23,6 +26,7 @@ const App = () => {
         }
       });
       setSelectedHeaders(newSelectedHeaders);
+      setLdifRule(defaulLdif);
     }
   }, [fileData]);
 
@@ -42,7 +46,11 @@ const App = () => {
     <div className="main">
       <div className="main-part">
         <ProccessOrUpload fileData={fileData} setFileData={setFileData} />
-        <LdifOu isActive={fileData ? true : false} />
+        <LdifOu
+          isActive={fileData ? true : false}
+          ldifRule={ldifRule}
+          setLdifRule={setLdifRule}
+        />
       </div>
       <div className="main-part">
         <SelectHeaders

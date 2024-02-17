@@ -1,0 +1,24 @@
+ul {
+  margin: 0 !important;
+  padding: 0 !important;
+  list-style: none;
+}
+.ldif-rules {
+  input {
+    width: 100%;
+  }
+
+  .object-type-inputs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 120px;
+    overflow-y: scroll;
+    .object-type-input-div {
+      width: 100%;
+      input {
+        width: 95%;
+      }
+    }
+  }
+}
