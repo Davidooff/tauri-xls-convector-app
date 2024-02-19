@@ -19,7 +19,7 @@ struct FieldEl{
   value: Value
 }
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 struct HeaderRulesWithColumn {
   column: Option<char>,
   base: HeaderRules
@@ -183,6 +183,8 @@ impl HeadresResolver {
             let not_inc_dep = Self::check_is_dep_inside(&self.headers_list, dependencies, val);
             if not_inc_dep.len() != 0 {
               to_include_later.push(HeaderRulesWithColumn{ column: column_name, base: val.clone()});
+            } else {
+              self.headers_list.insert(0, HeaderRulesWithColumn{ column: column_name, base: val.clone()})
             }
           } else {
               panic!("Wrong RegEx")
@@ -196,7 +198,9 @@ impl HeadresResolver {
     }
 
     // Working with vec of HeaderRulesWithColumn wich was not include bks they didn't have dependenci for work
-    while true && to_include_later.len() != 0 {
+    println!("FAS {:?}", to_include_later);
+    while to_include_later.len() != 0 {
+      println!("1");
       let mut to_rem: Vec<usize> = Vec::new();
       let mut change_made: bool = false;
         for (index ,to_inc) in to_include_later.iter().enumerate() {
@@ -204,6 +208,7 @@ impl HeadresResolver {
             if let Some(dependencies) = self.depend_on(&default_value) {
               let not_inc_dep = Self::check_is_dep_inside(&self.headers_list, dependencies, &HeaderRules{defaultValue: None, ldifName: to_inc.base.ldifName.clone(), name: to_inc.base.name.clone()});
               if not_inc_dep.len() == 0 {
+                self.headers_list.push(to_inc.clone());
                 to_rem.push(index);
                 change_made = true;
               } 
