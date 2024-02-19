@@ -8,6 +8,7 @@ import { SelectedHeaders } from "./types/SelectedHeaders";
 import { getFiltered } from "./sections/SelectHeaders/defaultRenaming";
 import { ldifRules } from "./types/LdifRule";
 import { defaulLdif } from "./sections/LdifOu/defaultLdif";
+import Result from "./sections/Result/Result";
 
 const App = () => {
   const [fileData, setFileData] = useState<FileData | null>(null);
@@ -60,6 +61,13 @@ const App = () => {
           addHeader={addHeader}
         />
       </div>
+      {ldifRule && fileData && (
+        <Result
+          ldif_rules={ldifRule}
+          fields={fileData?.body.fields}
+          headers={selectedHeaders}
+        />
+      )}
     </div>
   );
 };

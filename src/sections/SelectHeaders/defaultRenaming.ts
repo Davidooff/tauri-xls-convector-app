@@ -37,7 +37,7 @@ const changeOn: SelectedHeaders = {
   L1: { name: "department", ldifName: "departmentNumber", defaultValue: "" },
   N1: { name: null, ldifName: "st", defaultValue: "UA" },
   B1: { name: "lastname", ldifName: "sn", defaultValue: "NeedToBe" },
-  D1: { name: "Surname", ldifName: null, defaultValue: null },
+  D1: { name: "Surename", ldifName: null, defaultValue: null },
   NotAFieldGivenName: {
     name: "firstname",
     ldifName: "givenName",
