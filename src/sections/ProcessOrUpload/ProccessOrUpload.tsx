@@ -10,7 +10,7 @@ interface Props {
 const ProccessOrUpload = (props: Props) => {
   const { fileData, setFileData } = props;
   return (
-    <div>
+    <div className="procces">
       {fileData === null ? (
         <div className="raw">
           <DragAndDrop fileData={fileData} setFileData={setFileData} />
@@ -29,9 +29,6 @@ const ProccessFile = (props: Props) => {
       <div className="raw">
         <button onClick={() => setFileData(null)}>{"<- go back"}</button>
         {" " + fileData?.name}
-      </div>
-      <div className="raw">
-        <button>Proccess file</button>
       </div>
     </>
   );

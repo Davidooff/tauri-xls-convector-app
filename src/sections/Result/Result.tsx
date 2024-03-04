@@ -6,6 +6,7 @@ import { SelectedHeaders } from "../../types/SelectedHeaders";
 import { CalculatedHeaders } from "../../types/CalcedHeaders";
 import path from "path";
 import { BaseDirectory, writeTextFile } from "@tauri-apps/api/fs";
+import "./Result.scss";
 
 interface Props {
   ldif_rules: ldifRules;
