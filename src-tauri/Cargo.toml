@@ -17,8 +17,12 @@ tauri-build = { version = "1.5.1", features = [] }
 [dependencies]
 serde_json = "1.0"
 regex = "1.10.3"
-serde = { version = "1.0", features = ["derive"] }
-tauri = { version = "1.5.4", features = [] }
+rand = "0.8.5"
+translit = "*"
+sha1 = "*"
+hex = "*"
+serde = { version = "1.0.187", features = ["derive"] }
+tauri = { version = "1.5.4", features = ["api-all"] }
 
 
 [features]

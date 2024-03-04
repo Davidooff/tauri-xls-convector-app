@@ -45,29 +45,33 @@ const App = () => {
 
   return (
     <div className="main">
-      <div className="main-part">
-        <ProccessOrUpload fileData={fileData} setFileData={setFileData} />
-        <LdifOu
-          isActive={fileData ? true : false}
-          ldifRule={ldifRule}
-          setLdifRule={setLdifRule}
-        />
+      <div className="top">
+        <div className="main-part">
+          <ProccessOrUpload fileData={fileData} setFileData={setFileData} />
+          <LdifOu
+            isActive={fileData ? true : false}
+            ldifRule={ldifRule}
+            setLdifRule={setLdifRule}
+          />
+        </div>
+        <div className="main-part">
+          <SelectHeaders
+            headers={fileData?.body.headers}
+            selectedHeaders={selectedHeaders}
+            setSelectedHeaders={setSelectedHeaders}
+            addHeader={addHeader}
+          />
+        </div>
       </div>
-      <div className="main-part">
-        <SelectHeaders
-          headers={fileData?.body.headers}
-          selectedHeaders={selectedHeaders}
-          setSelectedHeaders={setSelectedHeaders}
-          addHeader={addHeader}
-        />
+      <div className="bottom">
+        {ldifRule && fileData && (
+          <Result
+            ldif_rules={ldifRule}
+            fields={fileData?.body.fields}
+            headers={selectedHeaders}
+          />
+        )}
       </div>
-      {ldifRule && fileData && (
-        <Result
-          ldif_rules={ldifRule}
-          fields={fileData?.body.fields}
-          headers={selectedHeaders}
-        />
-      )}
     </div>
   );
 };

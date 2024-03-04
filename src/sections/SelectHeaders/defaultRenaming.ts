@@ -20,38 +20,61 @@ const IfContain: { [key: string]: string } = {
 };
 
 const changeOn: SelectedHeaders = {
-  K1: { name: "email", ldifName: "mail", defaultValue: "NeedToBe" },
-  C1: { name: "Name", ldifName: null, defaultValue: null },
-  G1: { name: null, ldifName: "employeeNumber", defaultValue: "" },
-  J1: { name: null, ldifName: "l", defaultValue: "Полтава" },
+  K1: {
+    name: "email",
+    ldif_name: "mail",
+    default_value: "<reg>{name.username} + '@el.puet.edu.ua'",
+  },
+  C1: { name: "name", ldif_name: null, default_value: null },
+  G1: { name: null, ldif_name: "employeeNumber", default_value: "''" },
+  J1: { name: null, ldif_name: "l", default_value: "'Полтава'" },
   H1: {
-    name: "phone2",
-    ldifName: "mobile",
-    defaultValue: "<reg><mobile({ldif.mobile})>",
+    name: "phone",
+    ldif_name: null,
+    default_value: null,
   },
   I1: {
     name: null,
-    ldifName: "homePhone",
-    defaultValue: "<reg><mobile({ldif.homePhone})>",
+    ldif_name: "hPhone",
+    default_value: null,
   },
-  L1: { name: "department", ldifName: "departmentNumber", defaultValue: "" },
-  N1: { name: null, ldifName: "st", defaultValue: "UA" },
-  B1: { name: "lastname", ldifName: "sn", defaultValue: "NeedToBe" },
-  D1: { name: "Surename", ldifName: null, defaultValue: null },
+  NotAField123: {
+    name: "phone2",
+    ldif_name: "mobile",
+    default_value: "<reg><mobile({name.phone})>",
+  },
+  NotAField12: {
+    name: null,
+    ldif_name: "homePhone",
+    default_value: "<reg><mobile({ldif.hPhone})>",
+  },
+  L1: {
+    name: "department",
+    ldif_name: "departmentNumber",
+    default_value: "''",
+  },
+  N1: { name: null, ldif_name: "st", default_value: "'UA'" },
+  B1: { name: "lastname", ldif_name: "sn", default_value: "''" },
+  D1: { name: "Surename", ldif_name: null, default_value: null },
   NotAFieldGivenName: {
     name: "firstname",
-    ldifName: "givenName",
-    defaultValue: "<reg><{name.Name}> + ' ' + <{name.Surename}>",
+    ldif_name: "givenName",
+    default_value: "<reg><{name.name}> + ' ' + <{name.Surename}>",
   },
   F1: {
     name: null,
-    ldifName: "userPassword",
-    defaultValue: "<reg><SSHA({ldif.userPassword})>",
+    ldif_name: "pass",
+    default_value: null,
+  },
+  NotAFieldPassword: {
+    name: null,
+    ldif_name: "userPassword",
+    default_value: "<reg><SSHA({ldif.pass}))>",
   },
   E1: {
     name: "username",
-    ldifName: "uid",
-    defaultValue: "<reg><{ldif.uid}> + <randNum(2)>",
+    ldif_name: "uid",
+    default_value: "<reg><translit({ldif.sn})> + <randNum('2')>",
   },
 };
 

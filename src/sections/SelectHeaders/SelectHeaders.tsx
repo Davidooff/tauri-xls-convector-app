@@ -23,7 +23,7 @@ const SelectHeaders = (props: Props) => {
       } else {
         updatedVal = {
           ...val,
-          [name]: { name: value, ldifName: "ldifName", defaultValue: null },
+          [name]: { name: value, ldif_name: "ldifName", default_value: null },
         };
       }
       return updatedVal;
@@ -38,7 +38,7 @@ const SelectHeaders = (props: Props) => {
 
   const changeLdifName = (name: string, newValue: string) => {
     props.setSelectedHeaders((val) => {
-      return { ...val, [name]: { ...val[name], ldifName: newValue } };
+      return { ...val, [name]: { ...val[name], ldif_name: newValue } };
     });
   };
 
@@ -48,7 +48,7 @@ const SelectHeaders = (props: Props) => {
         ...val,
         [name]: {
           ...val[name],
-          defaultValue: newValue === "null" ? null : newValue,
+          default_value: newValue === "null" ? null : newValue,
         },
       };
     });
@@ -69,12 +69,12 @@ const SelectHeaders = (props: Props) => {
               name={el}
               ldifName={
                 el in selectedHeaders
-                  ? String(selectedHeaders[el].ldifName)
+                  ? String(selectedHeaders[el].ldif_name)
                   : "LdifName"
               }
               defaultValue={
                 el in selectedHeaders
-                  ? String(selectedHeaders[el].defaultValue)
+                  ? String(selectedHeaders[el].default_value)
                   : "null"
               }
               isActive={el in selectedHeaders}
